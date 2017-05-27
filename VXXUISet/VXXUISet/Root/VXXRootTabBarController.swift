@@ -19,17 +19,17 @@ class VXXRootTabBarController: UITabBarController {
         let base = VXXBaseViewController()
         base.view.backgroundColor = UIColor.red
         base.tabBarItem.title = "123"
-        let item1 = VXXTabBarItem(title: "首页")
+        let item1 = VXXTabBarItem(title: "首页", imageNor: "shouye_off", imageSelect: "shouye_on")
         
         let base1 = VXXBaseViewController()
         base1.view.backgroundColor = UIColor.blue
         base1.tabBarItem.title = "2"
-        let item2 = VXXTabBarItem(title: "列表")
+        let item2 = VXXTabBarItem(title: "列表页", imageNor: "paimai_off", imageSelect: "paimai_on")
         
         let base2 = VXXBaseViewController()
         base2.view.backgroundColor = UIColor.yellow
         base2.tabBarItem.title = "3"
-        let item3 = VXXTabBarItem(title: "我的")
+        let item3 = VXXTabBarItem(title: "首页", imageNor: "wode_off", imageSelect: "wode_on")
         
         self.viewControllers = [base,base1,base2]
         tabView.tabBarItems = [item1,item2,item3]

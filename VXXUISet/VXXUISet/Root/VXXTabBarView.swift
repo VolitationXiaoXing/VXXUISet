@@ -41,24 +41,67 @@ class VXXTabBarView: UIView {
 }
 
 
-class VXXTabBarItem: UIButton{
+class VXXTabBarItem: UIView{
     
     var title:String = ""
-    var image:UIImage? = UIImage()
+    var titleLabel:UILabel = UILabel()
+    var imageView:UIImageView = UIImageView()
     
-    convenience init(title:String,image:UIImage? = nil) {
-        self.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-         self.title = title
-         self.image = image
-        self.titleLabel?.text = title
-        self.imageView?.image = image
+    var index = 0
+    
+//    var isSelect:Bool{
+//        didSet{
+//            self.imageView.isHighlighted = isSelect
+//        }
+//    }
+    
+    var onViewClickedCallBack:(()->())?
+    
+    convenience init(title:String,imageNor:String,imageSelect:String) {
+        
+        super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        
+        self.title = title
+        self.imageView.image = UIImage(named: imageNor)
+        self.imageView.highlightedImage = UIImage(named: imageSelect)
+        
+        
+        self.titleLabel.text = self.title
+        self.titleLabel.textColor = UIColor.black
+        self.titleLabel.font = UIFont.systemFont(ofSize:10)
+        
+        
         self.backgroundColor = UIColor.white
+        self.addSubview(self.titleLabel)
+        self.addSubview(self.imageView)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(VXXTabBarItem.onViewClicked(index:)))
+        self.addGestureRecognizer(tap)
+    }
+    
+    func onViewClicked(index:Int) {
+        
+        self.isSelect = !self.isSelect
+        
+        
+        
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.titleLabel?.sizeToFit()
-        self.imageView?.sizeToFit()
+        self.imageView.sizeToFit()
+        self.titleLabel.sizeToFit()
+        
+        
+        self.titleLabel.x = (self.width - self.titleLabel.width) * 0.5
+        self.imageView.x = (self.width - self.imageView.width) * 0.5
+        
+        let margin:CGFloat = 2
+        
+        self.imageView.y = (self.height - self.imageView.height - self.titleLabel.height - margin) * 0.5
+        
+        self.titleLabel.y = self.imageView.y + self.imageView.height + margin
+        
     }
 }
