@@ -49,18 +49,20 @@ class VXXTabBarItem: UIView{
     
     var index = 0
     
-//    var isSelect:Bool{
-//        didSet{
-//            self.imageView.isHighlighted = isSelect
-//        }
-//    }
+    var isSelect:Bool?{
+        didSet{
+            if self.isSelect == nil{
+                return
+            }
+            
+            self.imageView.isHighlighted = isSelect!
+        }
+    }
     
     var onViewClickedCallBack:(()->())?
     
     convenience init(title:String,imageNor:String,imageSelect:String) {
-        
-        super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        
+        self.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         self.title = title
         self.imageView.image = UIImage(named: imageNor)
         self.imageView.highlightedImage = UIImage(named: imageSelect)
